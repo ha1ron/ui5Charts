@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds" xmlns:vizData="sap.viz.ui5.data">
+	<Dialog title="Hello">
+		<content>
+			<viz:VizFrame xmlns="sap.viz" id="idDualStackedChart" vizType="bar" width="800px" height="800px"
+				vizProperties="{dataLabel:{ showTotal: true},title:{ text:'Максимальный суммы станций начала. Фильтр период: 201501'}}">
+				<viz:dataset>
+					<vizData:FlattenedDataset data="{/barChartSet?$filter=calmonth eq '201501'}">
+						<vizData:dimensions>
+							<vizData:DimensionDefinition name="Станция" value="{stbeg}"/>
+						</vizData:dimensions>
+						<vizData:measures>
+							<vizData:MeasureDefinition name="Сумма" value="{miesumF}"/>
+					
+						</vizData:measures>
+					</vizData:FlattenedDataset>
+				</viz:dataset>
+				<viz:feeds>
+					<vizFeeds:FeedItem uid="valueAxis" type="Measure" values="Сумма"/>
+					<vizFeeds:FeedItem uid="categoryAxis" type="Dimension" values="Станция"/>
+				</viz:feeds>
+			</viz:VizFrame>
+		</content>
+		<endButton>
+			<Button text="Close It" press="closeDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
