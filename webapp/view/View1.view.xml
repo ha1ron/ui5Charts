@@ -1,6 +1,7 @@
 <mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:viz="sap.viz.ui5.controls"
 	xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds" xmlns:vizData="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
-	xmlns:viz.data="sap.viz.ui5.data" controllerName="DropDown.controller.View1" displayBlock="true">
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:mc="sap.suite.ui.microchart" xmlns:core="sap.ui.core" controllerName="DropDown.controller.View1"
+	displayBlock="true">
 	<App>
 		<pages>
 			<Page title="{i18n>title}">
@@ -9,10 +10,17 @@
 						<items>
 							<sap.ui.core:ListItem text="{st_spr} {Txtlg}" key="item1" id="__item3"/></items>
 					</Select>
+					<Input width="100%" id="inputEndStation" placeholder="станция конца" showSuggestion="true" suggestionItemSelected="endSuggest"
+						suggestionItems="{/stbegSet}" suggest="handleSuggest">
+						<suggestionItems>
+							<core:Item text="{st_spr} - {Txtlg}" key='{st_spr}'/>
+						</suggestionItems>
+					</Input>
 					<Button press="onPress" tooltip="EXCEL" text="Вызов диаграммы"/>
-					<viz:VizFrame id="DueDateGridFrame" vizType="info/pie" 
-						vizProperties="{plotArea:{dataLabel:{visible: true, type: 'value', distance: 0.3,  line: {visible: true}, hideWhenOverlap: true}}, 
-						                title:{ text:'Круговой график. Груз, суммы. Фильтр станция начала: 10002, период: 201501'}}" width="100%" height="100%">
+					<Button press="onPressPDF" tooltip="PDF" text="Сохранить ПДФ"/>
+					<viz:VizFrame id="DueDateGridFrame" vizType="info/pie"
+						vizProperties="{plotArea:{dataLabel:{visible: true, type: 'value', distance: 0.3, line: {visible: true}, hideWhenOverlap: true}}, title:{ text:'Круговой график. Груз, суммы. Фильтр станция начала: 10002, период: 201501'}}"
+						width="100%" height="100%">
 						<viz:dataset>
 							<viz.data:FlattenedDataset data="{/pieChartSet?$filter=calmonth eq '201501'and stbeg eq '010002'}">
 								<viz.data:dimensions>
@@ -29,6 +37,7 @@
 						</viz:feeds>
 					</viz:VizFrame>
 					<viz:Popover id="vizPopover"/>
+					 <mc:RadialMicroChart id = "mChart" size="L" percentage="45" press="press" width="100%" height ="500px"></mc:RadialMicroChart> 
 				</content>
 			</Page>
 		</pages>

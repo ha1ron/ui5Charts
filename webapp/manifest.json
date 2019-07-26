@@ -28,7 +28,7 @@
 		"technology": "UI5",
 		"icons": {
 			"icon": "",
-			"favIcon": "",
+			"favIcon": "libs/favicon.ico",
 			"phone": "",
 			"phone@2": "",
 			"tablet": "",
@@ -83,6 +83,15 @@
 		"resources": {
 			"css": [{
 				"uri": "css/style.css"
+			}],
+			"js": [{
+				"uri": "libs/rgbcolor.js"
+			}, {
+				"uri": "libs/stackblur.js"
+			}, {
+				"uri": "libs/canvg.js"
+			}, {
+				"uri": "libs/jsPDF.js"
 			}]
 		},
 		"routing": {
